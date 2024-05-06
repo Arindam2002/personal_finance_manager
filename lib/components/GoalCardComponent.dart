@@ -43,7 +43,7 @@ class GoalCardComponent extends StatelessWidget {
               radius: 30.0,
               lineWidth: 5.0,
               percent: goal.currentAmount! / goal.targetAmount,
-              center: Text('${(goal.currentAmount! / goal.targetAmount * 100).toStringAsFixed(0)}%', style: TextStyle(color: kPrimaryTextColor, fontSize: 12.0, fontWeight: FontWeight.bold),),
+              center: Text('${(goal.currentAmount! / goal.targetAmount * 100).toStringAsFixed(1)}%', style: TextStyle(color: kPrimaryTextColor, fontSize: 12.0, fontWeight: FontWeight.bold),),
               progressColor: kGoalProgressIndicatorColor,
             ),
             Expanded(
@@ -95,7 +95,7 @@ class GoalCardComponent extends StatelessWidget {
                         Text(
                           // '${goal.targetTime.difference(DateTime.now()).inDays} days left',
                           // Calculate the number if days in which the goal will be achieved
-                          '${calculateDaysLeft(goal.targetAmount, goal.currentAmount, goal.monthlySavings)} days left',
+                          '${calculateDaysLeft(goal.targetAmount, goal.currentAmount, goal.monthlySavings)} months left',
                           style: TextStyle(
                             color: kPrimaryTextColor.withOpacity(0.7),
                             fontSize: 12.0,

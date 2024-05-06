@@ -44,7 +44,7 @@ class BalanceCard extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            '${formatAmount(currentBalance)}',
+                            formatAmount(currentBalance),
                             style: const TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
