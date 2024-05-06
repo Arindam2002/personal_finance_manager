@@ -7,6 +7,7 @@ class Goal {
   double? currentAmount;
   final double? monthlySavings;
   late bool isCompleted;
+  late DateTime? createdTime;  // TODO: When API is made, on adding a goal, this will be set on Server side
 
   Goal({
     required this.id,
@@ -17,5 +18,6 @@ class Goal {
     this.currentAmount,
     this.monthlySavings,
     this.isCompleted = false,
+    this.createdTime,
   });
 }

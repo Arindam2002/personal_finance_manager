@@ -8,9 +8,15 @@ class GoalProvider with ChangeNotifier {
 
   List<Goal> get goals => _goals;
 
+  List<Goal> fetchGoals() {
+    // TODO: When fetching goals from the database, on the server side check if a month has passed since the goal was created, if yes, update the currentAmount and other fields accordingly like total balance, etc.
+    return _goals;
+  }
+
   void addGoal(Goal goal) {
     // set the id of the goal using uuid package
     goal.id = uuid.v4();
+    goal.createdTime = DateTime.now();
     _goals.add(goal);
     notifyListeners();
   }
