@@ -1,19 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_finance_manager/components/CashflowTile.dart';
 import 'package:personal_finance_manager/constants/constants.dart';
+import 'package:personal_finance_manager/providers/AccountProvider.dart';
 import 'package:personal_finance_manager/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class BalanceCard extends StatelessWidget {
-  final double currentBalance;
-  final double income;
-  final double expense;
 
   const BalanceCard({
     super.key,
-    required this.currentBalance,
-    required this.income,
-    required this.expense,
   });
 
   @override
@@ -44,7 +41,7 @@ class BalanceCard extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            formatAmount(currentBalance),
+                            formatAmount(Provider.of<AccountProvider>(context).currentBalance),
                             style: const TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
@@ -66,65 +63,23 @@ class BalanceCard extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10.0),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white.withOpacity(0.3),
-                                  radius: 16,
-                                  child: const Icon(
-                                    Icons.arrow_upward_rounded,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${formatAmount(income)}',
-                                    style: const TextStyle(
-                                        fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.bold),
-                                  ),
-                                  const Text(
-                                    'Income',
-                                    style: TextStyle(
-                                        fontSize: 12.0, color: Colors.white, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          CashflowTile(
+                            title: 'Income',
+                            amount: Provider.of<AccountProvider>(context).monthlyIncome,
+                            iconData: Icons.arrow_downward_rounded,
+                            titleFontSize: 12.0,
+                            amountFontSize: 14.0,
+                            iconSize: 20,
+                            iconRadius: 16,
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10.0),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white.withOpacity(0.3),
-                                  radius: 16,
-                                  child: const Icon(
-                                    Icons.arrow_downward_rounded,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${formatAmount(expense)}',
-                                    style: const TextStyle(
-                                        fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.bold),
-                                  ),
-                                  const Text(
-                                    'Expense',
-                                    style: TextStyle(
-                                        fontSize: 12.0, color: Colors.white, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          CashflowTile(
+                            title: 'Expense',
+                            amount: Provider.of<AccountProvider>(context).monthlyExpense,
+                            iconData: Icons.arrow_upward_rounded,
+                            titleFontSize: 12.0,
+                            amountFontSize: 14.0,
+                            iconSize: 20,
+                            iconRadius: 16,
                           ),
                         ],
                       ),

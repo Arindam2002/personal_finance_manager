@@ -18,18 +18,14 @@ class _GoalsCardState extends State<GoalsCard> {
 
   void _addGoal() {
     // Open a dialog box to enter the details for a new goal
-    Navigator.push(context, MaterialPageRoute(builder: (context) => NewGoalScreen(isEditable: false,)));
-    // When the user saves the new goal, add it to the list of goals
-    //   append a random goal object in goals
-    // setState(() {
-    //   goals.add(Goal(
-    //     title: 'Buy iPhone 15 Pro Max',
-    //     targetAmount: 150000,
-    //     currentAmount: 85000,
-    //     targetTime: DateTime.now().add(const Duration(days: 30)),
-    //     isLongTerm: false,
-    //   ));
-    // });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NewGoalScreen(
+          isEditable: false,
+        ),
+      ),
+    );
   }
 
   @override
@@ -72,20 +68,22 @@ class _GoalsCardState extends State<GoalsCard> {
                   Goal goal = Provider.of<GoalProvider>(context).goals[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 5.0),
-                    child: !goal.isCompleted ? GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NewGoalScreen(
-                              isEditable: true,
-                              goal: goal,
-                            ),
-                          ),
-                        );
-                      },
-                      child: GoalCardComponent(goal: goal),
-                    ) : Container(),
+                    child: !goal.isCompleted
+                        ? GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NewGoalScreen(
+                                    isEditable: true,
+                                    goal: goal,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: GoalCardComponent(goal: goal),
+                          )
+                        : Container(),
                   );
                 },
               ),

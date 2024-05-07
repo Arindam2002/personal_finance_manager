@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:personal_finance_manager/components/BalanceCard.dart';
 import 'package:personal_finance_manager/components/GoalsCard.dart';
 import 'package:personal_finance_manager/constants/constants.dart';
+import 'package:personal_finance_manager/providers/AccountProvider.dart';
 import 'package:personal_finance_manager/providers/GoalProvider.dart';
+import 'package:personal_finance_manager/screens/AccountScreen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -11,6 +14,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => GoalProvider()),
+        ChangeNotifierProvider(create: (context) => AccountProvider())
       ],
       child: MyApp(),
     ),
@@ -92,8 +96,17 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: ListView(
               children: [
-                BalanceCard(
-                    currentBalance: 55000.20, income: 12000, expense: 10000),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AccountScreen(),
+                      ),
+                    );
+                  },
+                  child: const BalanceCard(),
+                ),
                 GoalsCard()
               ],
             ),
