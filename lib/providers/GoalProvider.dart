@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class GoalProvider with ChangeNotifier {
   List<Goal> _goals = [];
-  var uuid = Uuid();
+  var uuid = const Uuid();
 
   List<Goal> get goals => _goals;
 
@@ -15,7 +15,7 @@ class GoalProvider with ChangeNotifier {
 
   void addGoal(Goal goal) {
     // set the id of the goal using uuid package
-    goal.id = uuid.v4();
+    goal.id = uuid.v4();  // TODO: When Backend is implemented, this will be set on the server side, an empty string will be sent from the client side
     goal.createdTime = DateTime.now();
     _goals.add(goal);
     notifyListeners();

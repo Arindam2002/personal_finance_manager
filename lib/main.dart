@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:personal_finance_manager/components/BalanceCard.dart';
 import 'package:personal_finance_manager/components/GoalsCard.dart';
+import 'package:personal_finance_manager/components/RecentTransactionsCard.dart';
 import 'package:personal_finance_manager/constants/constants.dart';
 import 'package:personal_finance_manager/providers/AccountProvider.dart';
+import 'package:personal_finance_manager/providers/EventProvider.dart';
 import 'package:personal_finance_manager/providers/GoalProvider.dart';
 import 'package:personal_finance_manager/screens/AccountScreen.dart';
+import 'package:personal_finance_manager/screens/NewTransaction.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,7 +17,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => GoalProvider()),
-        ChangeNotifierProvider(create: (context) => AccountProvider())
+        ChangeNotifierProvider(create: (context) => AccountProvider()),
+        ChangeNotifierProvider(create: (context) => EventProvider()),
       ],
       child: MyApp(),
     ),
@@ -74,19 +78,24 @@ class _MyHomePageState extends State<MyHomePage> {
           spacing: 10,
           children: [
             SpeedDialChild(
-              child: Icon(Icons.add),
-              label: 'Increment',
-              onTap: () {},
+              child: Icon(Icons.money_off),
+              label: 'Add a transaction',
+              onTap: () {
+                // Add your code here to handle when the user taps on 'Expense'
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NewTransaction(),
+                  ),
+                );
+              },
             ),
             SpeedDialChild(
-              child: Icon(Icons.remove),
-              label: 'Decrement',
-              onTap: () {},
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.refresh),
-              label: 'Reset',
-              onTap: () {},
+              child: Icon(Icons.swap_horiz_rounded),
+              label: 'Transfer money',
+              onTap: () {
+                // Add your code here to handle when the user taps on 'Savings'
+              },
             ),
           ],
         ),
@@ -107,7 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const BalanceCard(),
                 ),
-                GoalsCard()
+
+                const RecentTransactionsCard(),
+                const SizedBox(height: 20),
+
+                GoalsCard(),
+                const SizedBox(height: 20),
               ],
             ),
           ),

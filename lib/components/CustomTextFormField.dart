@@ -20,12 +20,13 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: formController,
       validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: keyboardType,
-      style: TextStyle(color: kPrimaryTextColor),
+      style: TextStyle(color: kPrimaryTextColor, fontSize: 14),
       cursorColor: kPrimaryTextColor,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Color(0xFF7f8180)),
+        labelStyle: const TextStyle(color: Color(0xFF7f8180), fontSize: 14),
         border: InputBorder.none,
         contentPadding: const EdgeInsets.all(10),
         focusedBorder: const OutlineInputBorder(
@@ -33,6 +34,12 @@ class CustomTextFormField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: kGreyColor),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
       ),
     );

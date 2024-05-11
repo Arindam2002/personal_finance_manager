@@ -34,3 +34,36 @@ BoxDecoration kScaffoldDecoration = BoxDecoration(
     colors: [kPrimaryLightColor, kPrimaryColor],
   ),
 );
+
+// Form Input Decoration
+InputDecoration kFormFieldInputDecoration = InputDecoration(
+  labelStyle: const TextStyle(color: Color(0xFF7f8180), fontSize: 14),
+  border: InputBorder.none,
+  contentPadding: const EdgeInsets.all(10),
+  focusedBorder: const OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kGreyColor),
+  ),
+  errorBorder: const OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.red),
+  ),
+  focusedErrorBorder: const OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white),
+  ),
+);
+
+// Define the categories and their respective icons
+final Map<String, IconData> categories = {
+  'Income': Icons.add_card_rounded,
+  'Food': Icons.fastfood,
+  'Shopping': Icons.shopping_cart,
+  'Transport': Icons.directions_car,
+  'Bills': Icons.receipt,
+  'Entertainment': Icons.movie,
+  'Health': Icons.local_hospital,
+  'Education': Icons.school,
+  'Groceries': Icons.local_grocery_store,
+  'Other': Icons.more_horiz,
+};

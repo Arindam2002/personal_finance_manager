@@ -25,7 +25,7 @@ class NewGoalScreen extends StatefulWidget {
 class _NewGoalState extends State<NewGoalScreen> {
   bool get isEditMode => widget.isEditable;
 
-  final _formKey = GlobalKey<FormState>();
+  final _goalFormKey = GlobalKey<FormState>();
 
   // Define the form field controllers
   final _titleController = TextEditingController();
@@ -118,7 +118,7 @@ class _NewGoalState extends State<NewGoalScreen> {
             children: [
               Expanded(
                 child: Form(
-                  key: _formKey,
+                  key: _goalFormKey,
                   child: ListView(
                     children: <Widget>[
                       const SizedBox(height: 10),
@@ -283,7 +283,11 @@ class _NewGoalState extends State<NewGoalScreen> {
               ElevatedButton(
                 child: Text(isEditMode ? 'Save Changes' : 'Add Goal'),
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (_goalFormKey.currentState!.validate()) {
+                    print('-------------------------------------------------------------------------');
+
+                    print('Title: ${_titleController.text}');
+                    print('Target Amount: ${_targetAmountController.text}');
                     final Goal goal = Goal(
                       id: isEditMode ? widget.goal!.id : "",
                       title: _titleController.text,
